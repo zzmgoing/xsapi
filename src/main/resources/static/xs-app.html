@@ -47,42 +47,49 @@
 </div>
 <script src="/layui/layui.js"></script>
 <script type="text/html" id="urlTplXs">
-    <a href="https://fir.im/qb7s?release_id={{d.release_id}}" class="layui-table-link" target="_blank">https://fir.im/qb7s?release_id={{ d.release_id }}</a>
+    <a href="https://fir.im/qb7s?release_id={{d.release_id}}" class="layui-table-link" target="_blank">https://fir.im/qb7s?release_id={{
+        d.release_id }}</a>
 </script>
 <script type="text/html" id="urlTplBw">
-    <a href="https://fir.im/m4zr?release_id={{d.release_id}}" class="layui-table-link" target="_blank">https://fir.im/m4zr?release_id={{ d.release_id }}</a>
-</script>
-<script type="text/html" id="formatTime">
-    <div>{{layui.util.toDateString(d.create_time, 'yyyy年MM月dd日 HH:mm:ss')}}</div>
+    <a href="https://fir.im/m4zr?release_id={{d.release_id}}" class="layui-table-link" target="_blank">https://fir.im/m4zr?release_id={{
+        d.release_id }}</a>
 </script>
 <script>
-    layui.use(['layer', 'table','element'], function () {
+    layui.use(['layer', 'table', 'util', 'element'], function () {
         var element = layui.element,
             table = layui.table;
         table.render({
             elem: '#android-table-xiangshang'
-            ,height: 500
-            ,url: 'http://10.200.43.253:8088/xsapi/jenkins/findAll/xiangshang'
-            ,page: true
-            ,cols: [[
-                {field: 'build_id', title: '构建ID', width:200}
-                ,{field: 'version_name', title: '版本名称', width:200}
-                ,{field: 'version_code', title: '版本号', width:200}
-                ,{field: 'create_time', title: '构建时间', width:300, templet:"formatTime"}
-                ,{field: 'release_id', title: '下载地址', width: 500, templet: '#urlTplXs'}
+            , url: 'http://10.200.43.253:8088/xsapi/jenkins/findAll/xiangshang'
+            , page: false
+            , cols: [[
+                {field: 'build_id', title: '构建ID', width: 200}
+                , {field: 'version_name', title: '版本名称', width: 200}
+                , {field: 'version_code', title: '版本号', width: 200}
+                , {
+                    field: 'create_time',
+                    title: '构建时间',
+                    width: 300,
+                    templet: "<div>{{layui.util.toDateString(d.create_time, 'yyyy年MM月dd日 HH:mm:ss')}}</div>"
+                }
+                , {field: 'release_id', title: '下载地址', width: 500, templet: '#urlTplXs'}
             ]]
         });
         table.render({
             elem: '#android-table-blackwhale'
-            ,height: 500
-            ,url: 'http://10.200.43.253:8088/xsapi/jenkins/findAll/blackwhale'
-            ,page: true
-            ,cols: [[
-                {field: 'build_id', title: '构建ID', width:200}
-                ,{field: 'version_name', title: '版本名称', width:200}
-                ,{field: 'version_code', title: '版本号', width:200}
-                ,{field: 'create_time', title: '构建时间', width:300, templet:"formatTime"}
-                ,{field: 'release_id', title: '下载地址', width: 500, templet: '#urlTplBw'}
+            , url: 'http://10.200.43.253:8088/xsapi/jenkins/findAll/blackwhale'
+            , page: false
+            , cols: [[
+                {field: 'build_id', title: '构建ID', width: 200}
+                , {field: 'version_name', title: '版本名称', width: 200}
+                , {field: 'version_code', title: '版本号', width: 200}
+                , {
+                    field: 'create_time',
+                    title: '构建时间',
+                    width: 300,
+                    templet: "<div>{{layui.util.toDateString(d.create_time, 'yyyy年MM月dd日 HH:mm:ss')}}</div>"
+                }
+                , {field: 'release_id', title: '下载地址', width: 500, templet: '#urlTplBw'}
             ]]
         });
     });
