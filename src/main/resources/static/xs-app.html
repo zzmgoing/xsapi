@@ -26,23 +26,23 @@
         <li>IOS</li>
     </ul>
     <div class="layui-tab-content">
-        <div class="layui-tab-item layui-show" data-anim="layui-anim-fadein">
+        <div class="layui-tab-item layui-show">
             <div class="layui-tab layui-tab-card">
                 <ul class="layui-tab-title">
                     <li class="layui-this">向上金服</li>
                     <li>黑鲸智投</li>
                 </ul>
                 <div class="layui-tab-content">
-                    <div class="layui-tab-item layui-show">
+                    <div class="layui-tab-item layui-show" data-anim="layui-anim-fadein">
                         <table id="android-table-xiangshang" lay-filter="android-table-xiangshang"></table>
                     </div>
-                    <div class="layui-tab-item">
+                    <div class="layui-tab-item" data-anim="layui-anim-fadein">
                         <table id="android-table-blackwhale" lay-filter="android-table-blackwhale"></table>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="layui-tab-item">IOS下载地址</div>
+        <div class="layui-tab-item"><a href="http://ios.xs.jf" target="_blank">http://ios.xs.jf</a></div>
     </div>
 </div>
 <script src="/layui/layui.js"></script>
@@ -57,7 +57,8 @@
 <script>
     layui.use(['layer', 'table', 'util', 'element'], function () {
         var element = layui.element,
-            table = layui.table;
+            table = layui.table,
+            util = layui.util;
         table.render({
             elem: '#android-table-xiangshang'
             , url: 'http://10.200.43.253:8088/xsapi/jenkins/findAll/xiangshang'
@@ -70,7 +71,7 @@
                     field: 'create_time',
                     title: '构建时间',
                     width: 300,
-                    templet: "<div>{{layui.util.toDateString(d.create_time, 'yyyy年MM月dd日 HH:mm:ss')}}</div>"
+                    templet: "<div>{{util.toDateString(d.create_time, 'yyyy-MM-dd HH:mm:ss')}}</div>"
                 }
                 , {field: 'release_id', title: '下载地址', width: 500, templet: '#urlTplXs'}
             ]]
@@ -87,7 +88,7 @@
                     field: 'create_time',
                     title: '构建时间',
                     width: 300,
-                    templet: "<div>{{layui.util.toDateString(d.create_time, 'yyyy年MM月dd日 HH:mm:ss')}}</div>"
+                    templet: "<div>{{util.toDateString(d.create_time, 'yyyy-MM-dd HH:mm:ss')}}</div>"
                 }
                 , {field: 'release_id', title: '下载地址', width: 500, templet: '#urlTplBw'}
             ]]
