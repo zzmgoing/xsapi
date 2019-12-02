@@ -42,7 +42,7 @@ public class JenkinsBuildController {
         bean.setType(type);
         bean.setVersion_code(version_code);
         bean.setVersion_name(version_name);
-        bean.setCreate_time(String.valueOf(System.currentTimeMillis()));
+        bean.setCreate_time(String.valueOf(System.currentTimeMillis()/1000));
         jenkinsBuildIdRecordService.add(bean);
         return GsonUtil.createJson(new BaseResponse<>(200, "成功", ""));
     }
