@@ -42,7 +42,7 @@ public class JenkinsBuildIdRecordService {
     public List<JenkinsBuildIdBean> findAll(String type) {
         String sql = "SELECT * FROM zzm_xs_apk_new_version WHERE type=? ORDER BY version_code DESC";
         try {
-            return jdbcTemplate.queryForList(sql, new Object[]{type}, JenkinsBuildIdBean.class);
+            return jdbcTemplate.query(sql, new Object[]{type}, new BeanPropertyRowMapper(JenkinsBuildIdBean.class));
         } catch (Exception e) {
             return null;
         }

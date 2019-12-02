@@ -27,15 +27,24 @@
     </ul>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show" data-anim="layui-anim-fadein">
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend>向上金服</legend>
+            </fieldset>
             <table id="android-table-xiangshang" lay-filter="android-table-xiangshang"></table>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                <legend>黑鲸智投</legend>
+            </fieldset>
             <table id="android-table-blackwhale" lay-filter="android-table-blackwhale"></table>
         </div>
         <div class="layui-tab-item">IOS下载地址</div>
     </div>
 </div>
 <script src="/layui/layui.js"></script>
-<script type="text/html" id="urlTpl">
-    <a href="{{d.url}}" class="layui-table-link" target="_blank">{{ d.url }}</a>
+<script type="text/html" id="urlTplXs">
+    <a href="https://fir.im/qb7s?release_id={{d.release_id}}" class="layui-table-link" target="_blank">https://fir.im/qb7s?release_id={{ d.release_id }}</a>
+</script>
+<script type="text/html" id="urlTplBw">
+    <a href="https://fir.im/m4zr?release_id={{d.release_id}}" class="layui-table-link" target="_blank">https://fir.im/m4zr?release_id={{ d.release_id }}</a>
 </script>
 <script>
     layui.use(['layer', 'table','element'], function () {
@@ -43,28 +52,28 @@
             table = layui.table;
         table.render({
             elem: '#android-table-xiangshang'
-            ,height: 312
+            ,height: 350
             ,url: 'http://10.200.43.253:8088/xsapi/jenkins/findAll/xiangshang'
             ,page: true
             ,cols: [[
-                {field: 'build_id', title: '构建ID', width:80}
-                ,{field: 'version_name', title: '版本名称', width:80}
-                ,{field: 'version_code', title: '版本号', width:80}
-                ,{field: 'create_time', title: '构建时间', width:120}
-                ,{field: 'url', title: '下载地址', width: 320, templet: '#urlTpl'}
+                {field: 'build_id', title: '构建ID', width:200}
+                ,{field: 'version_name', title: '版本名称', width:200}
+                ,{field: 'version_code', title: '版本号', width:200}
+                ,{field: 'create_time', title: '构建时间', width:300}
+                ,{field: 'release_id', title: '下载地址', width: 500, templet: '#urlTplXs'}
             ]]
         });
         table.render({
             elem: '#android-table-blackwhale'
-            ,height: 312
+            ,height: 350
             ,url: 'http://10.200.43.253:8088/xsapi/jenkins/findAll/blackwhale'
             ,page: true
             ,cols: [[
-                {field: 'build_id', title: '构建ID', width:80}
-                ,{field: 'version_name', title: '版本名称', width:80}
-                ,{field: 'version_code', title: '版本号', width:80}
-                ,{field: 'create_time', title: '构建时间', width:120}
-                ,{field: 'url', title: '下载地址', width: 320, templet: '#urlTpl'}
+                {field: 'build_id', title: '构建ID', width:200}
+                ,{field: 'version_name', title: '版本名称', width:200}
+                ,{field: 'version_code', title: '版本号', width:200}
+                ,{field: 'create_time', title: '构建时间', width:300}
+                ,{field: 'release_id', title: '下载地址', width: 500, templet: '#urlTplBw'}
             ]]
         });
     });

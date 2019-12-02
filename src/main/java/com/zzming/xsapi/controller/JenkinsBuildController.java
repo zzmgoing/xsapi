@@ -1,6 +1,5 @@
 package com.zzming.xsapi.controller;
 
-import com.google.gson.JsonObject;
 import com.zzming.xsapi.model.BaseResponse;
 import com.zzming.xsapi.model.JenkinsBuildIdBean;
 import com.zzming.xsapi.model.TableDataBean;
@@ -82,7 +81,7 @@ public class JenkinsBuildController {
      * @return
      */
     @RequestMapping(value = "/app", method = RequestMethod.GET)
-    public void excel2csv(HttpServletResponse response){
+    public void app(HttpServletResponse response){
         try {
             response.sendRedirect("http://10.200.43.253:8088/xsapi/xs-app.html");
         } catch (IOException e) {
@@ -100,13 +99,6 @@ public class JenkinsBuildController {
         List<JenkinsBuildIdBean> all = jenkinsBuildIdRecordService.findAll(type);
         try {
             if (all != null && all.size() > 0) {
-                for(JenkinsBuildIdBean buildIdBean : all){
-                    if("xiangshang".equals(buildIdBean.getType())){
-                        buildIdBean.setUrl("https://fir.im/qb7s?release_id=" + buildIdBean.getRelease_id());
-                    }else if("blackwhale".equals(buildIdBean.getType())){
-                        buildIdBean.setUrl("https://fir.im/m4zr?release_id=" + buildIdBean.getRelease_id());
-                    }
-                }
                 TableDataBean dataBean = new TableDataBean<JenkinsBuildIdBean>(0,"",all.size(),all);
                 return GsonUtil.createJson(dataBean);
             } else {
