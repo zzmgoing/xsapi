@@ -14,6 +14,8 @@ public class JenkinsBuildIdBean {
 
     private String create_time;
 
+    private String url;
+
     public int getBuild_id() {
         return build_id;
     }
@@ -60,5 +62,13 @@ public class JenkinsBuildIdBean {
 
     public void setCreate_time(String create_time) {
         this.create_time = create_time;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

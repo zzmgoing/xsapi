@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>向上客户端</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layui-tab">
+    <ul class="layui-tab-title">
+        <li class="layui-this">Android</li>
+        <li>IOS</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show" data-anim="layui-anim-fadein">
+            <table id="android-table-xiangshang" lay-filter="android-table-xiangshang"></table>
+            <table id="android-table-blackwhale" lay-filter="android-table-blackwhale"></table>
+        </div>
+        <div class="layui-tab-item">IOS下载地址</div>
+    </div>
+</div>
+<script src="/layui/layui.js"></script>
+<script type="text/html" id="urlTpl">
+    <a href="{{d.url}}" class="layui-table-link" target="_blank">{{ d.url }}</a>
+</script>
+<script>
+    layui.use(['layer', 'table','element'], function () {
+        var element = layui.element,
+            table = layui.table;
+        table.render({
+            elem: '#android-table-xiangshang'
+            ,height: 312
+            ,url: 'http://10.200.43.253:8088/xsapi/jenkins/findAll/xiangshang'
+            ,page: true
+            ,cols: [[
+                {field: 'build_id', title: '构建ID', width:80}
+                ,{field: 'version_name', title: '版本名称', width:80}
+                ,{field: 'version_code', title: '版本号', width:80}
+                ,{field: 'create_time', title: '构建时间', width:120}
+                ,{field: 'url', title: '下载地址', width: 320, templet: '#urlTpl'}
+            ]]
+        });
+        table.render({
+            elem: '#android-table-blackwhale'
+            ,height: 312
+            ,url: 'http://10.200.43.253:8088/xsapi/jenkins/findAll/blackwhale'
+            ,page: true
+            ,cols: [[
+                {field: 'build_id', title: '构建ID', width:80}
+                ,{field: 'version_name', title: '版本名称', width:80}
+                ,{field: 'version_code', title: '版本号', width:80}
+                ,{field: 'create_time', title: '构建时间', width:120}
+                ,{field: 'url', title: '下载地址', width: 320, templet: '#urlTpl'}
+            ]]
+        });
+    });
+</script>
+</body>
+</html>
