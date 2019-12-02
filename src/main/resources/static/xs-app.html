@@ -55,11 +55,10 @@
         d.release_id }}</a>
 </script>
 <script>
-    var util;
     layui.use(['layer', 'table', 'util', 'element'], function () {
         var element = layui.element,
-            table = layui.table;
-        util = layui.util;
+            table = layui.table,
+            util = layui.util;
         table.render({
             elem: '#android-table-xiangshang'
             , url: 'http://10.200.43.253:8088/xsapi/jenkins/findAll/xiangshang'
@@ -72,7 +71,7 @@
                     field: 'create_time',
                     title: '构建时间',
                     width: 300,
-                    templet: "<div>{{util.toDateString(d.create_time, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                    templet: function(d) {return util.toDateString(d.create_time*1000); }
                 }
                 , {field: 'release_id', title: '下载地址', width: 500, templet: '#urlTplXs'}
             ]]
@@ -89,7 +88,7 @@
                     field: 'create_time',
                     title: '构建时间',
                     width: 300,
-                    templet: "<div>{{util.toDateString(d.create_time, 'yyyy-MM-dd HH:mm:ss')}}</div>"
+                    templet: function(d) {return util.toDateString(d.create_time*1000); }
                 }
                 , {field: 'release_id', title: '下载地址', width: 500, templet: '#urlTplBw'}
             ]]
