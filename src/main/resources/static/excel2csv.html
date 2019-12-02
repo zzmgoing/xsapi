@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Excel2Csv</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            /*background: url("/images/bg_excel2csv.jpg") no-repeat;*/
+            /*background-size: 100% 100%;*/
+            /*position: absolute;*/
+        }
+
+        .layui-upload-drag {
+            /*width: 200px;*/
+            /*height: 200px;*/
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -100px 0 0 -100px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="layui-upload-drag layui-anim layui-anim-rotate" id="uploadFile">
+    <i class="layui-icon"></i>
+    <p>点击上传，或将文件拖拽到此处</p>
+    <p>仅支持Excel文件</p>
+</div>
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['layer', 'upload'], function () {
+        var layer = layui.layer
+            , upload = layui.upload;
+        upload.render({
+            elem: '#uploadFile'
+            , url: 'http://10.200.43.253:8088/xsapi/excel/excel2csv'
+            , method: 'POST'
+            , accept: 'file'
+            , exts: 'xls|xlsx'
+            ,before: function(obj){
+                layer.load(2);
+            }
+            , done: function (res) {
+                console.log(res);
+                layer.closeAll();
+                layer.msg(res.message);
+                if (res.code === 200) {
+                    window.open(res.data)
+                }
+            }
+            ,error: function(){
+                layer.closeAll();
+                layer.msg("上传失败，请检查网络设置");
+            }
+        });
+    });
+</script>
+</body>
+</html>
