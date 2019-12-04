@@ -340,7 +340,7 @@ public class Excel2CsvUtil {
                 i++;
             }
         }
-        String newFileName = FileUtil.getPublicPath() + "【禅道】" + fileName;
+        String newFileName = FileUtil.getPublicPath("excel") + "【禅道】" + fileName;
         FileOutputStream fileOutputStream = new FileOutputStream(newFileName);
         xSSFWorkbook.write(fileOutputStream);
         fileOutputStream.close();
@@ -360,7 +360,8 @@ public class Excel2CsvUtil {
             return null;
         }
         FileUtil.deleteFile(new File(newFileName));
-        return csvName2;
+        File file = new File(csvName2);
+        return "http://10.200.43.253:8088/excel/" + file.getName();
     }
 
     private static String getCellValue(Cell cell) {

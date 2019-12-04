@@ -26,7 +26,7 @@ public class ExcelController {
     @RequestMapping(value = "/excel2csv", method = RequestMethod.GET)
     public void excel2csv(HttpServletResponse response){
         try {
-            response.sendRedirect("http://10.200.43.253:8088/xsapi/excel2csv.html");
+            response.sendRedirect("http://10.200.43.253:8088/xsapi/xs-app.html");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,8 +51,8 @@ public class ExcelController {
         FileUtil.deleteFile(lsFile);
         if(csvFilePath != null){
             String newFileName = FileUtil.fixFileName(csvFilePath, oldName);
-            String path = "http://10.200.43.253:8088/tempfile/" + oldName + ".csv";
-            return GsonUtil.createJson(new BaseResponse<>(200, "转换成功,开始下载", path));
+//            String path = "http://10.200.43.253:8088/tempfile/" + oldName + ".csv";
+            return GsonUtil.createJson(new BaseResponse<>(200, "转换成功,开始下载", csvFilePath));
         }else{
             return GsonUtil.createJson(new BaseResponse<>(202, "转换文件失败", ""));
         }

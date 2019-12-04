@@ -1,6 +1,6 @@
 package com.zzming.xsapi.util;
 
-import org.springframework.util.ClassUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
@@ -8,13 +8,24 @@ import java.io.FileNotFoundException;
 
 public class FileUtil {
 
+    @Value("${file.excel}")
+    private String excelPath;
+
     /**
      * 获取资源文件路径
      *
      * @return
      */
-    public static String getPublicPath() {
-        return "/Users/admin/Library/apache-tomcat-9.0.27/webapps/tempfile/";
+    public static String getPublicPath(String floderName) throws FileNotFoundException {
+        File path = new File(ResourceUtils.getURL("classpath:static").getPath().replace("%20"," ").replace('/', '\\'));
+        if(!path.exists()) {
+            path = new File("");
+        }
+        File upload = new File(path.getAbsolutePath(),floderName + "/");
+        if(!upload.exists()) {
+            upload.mkdirs();
+        }
+        return upload.getAbsolutePath()+"/";
     }
 
     /**

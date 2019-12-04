@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>测试</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    测试
+</div>
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['layer'], function () {
+        var layer = layui.layer;
+        var version = window.xiangshang.getDeviceId();
+        layer.msg("调用获得getDeviceId=" + version);
+    });
+</script>
+</body>
+</html>

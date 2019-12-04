@@ -17,6 +17,13 @@
             text-align: center;
         }
 
+        .layui-upload-drag {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -100px 0 0 -100px;
+        }
+
     </style>
 </head>
 <body>
@@ -24,6 +31,7 @@
     <ul class="layui-tab-title">
         <li class="layui-this">Android</li>
         <li>IOS</li>
+        <li>测试用例在线转换</li>
     </ul>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
@@ -56,6 +64,14 @@
         <div class="layui-tab-item">
             <iframe style="width: 100%;height: 900px" src="http://ios.xs.jf" scrolling="yes"></iframe>
         </div>
+        <div class="layui-tab-item">
+            <blockquote class="layui-elem-quote layui-quote-nm"><span class="layui-badge-dot"></span> 提示：仅支持测试用例在线转换！</blockquote>
+            <div class="layui-upload-drag layui-anim layui-anim-rotate" id="uploadFile">
+                <i class="layui-icon"></i>
+                <p>点击上传，或将文件拖拽到此处</p>
+                <p>仅支持Excel文件</p>
+            </div>
+        </div>
     </div>
 </div>
 <script src="/layui/layui.js"></script>
@@ -68,10 +84,11 @@
         d.release_id }}</a>
 </script>
 <script>
-    layui.use(['layer', 'table', 'util', 'element'], function () {
+    layui.use(['layer', 'table', 'util', 'element', 'upload'], function () {
         var element = layui.element,
             table = layui.table,
-            util = layui.util;
+            util = layui.util,
+            upload = layui.upload;
         table.render({
             elem: '#android-table-xiangshang'
             , url: 'http://10.200.43.253:8088/xsapi/jenkins/findAll/xiangshang'
@@ -105,6 +122,28 @@
                 }
                 , {field: 'release_id', title: '下载地址', width: 500, templet: '#urlTplBw'}
             ]]
+        });
+        upload.render({
+            elem: '#uploadFile'
+            , url: 'http://10.200.43.253:8088/xsapi/excel/excel2csv'
+            , method: 'POST'
+            , accept: 'file'
+            , exts: 'xls|xlsx'
+            ,before: function(obj){
+                layer.load(2);
+            }
+            , done: function (res) {
+                console.log(res);
+                layer.closeAll();
+                layer.msg(res.message);
+                if (res.code === 200) {
+                    window.open(res.data)
+                }
+            }
+            ,error: function(){
+                layer.closeAll();
+                layer.msg("上传失败，请检查网络设置");
+            }
         });
     });
 </script>
