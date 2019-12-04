@@ -16,6 +16,7 @@ public class UploadFilePathConfig extends WebMvcConfigurationSupport {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(staticAccessPath).addResourceLocations("file:" + uploadFolder);
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
     }
 
 }
