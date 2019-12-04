@@ -10,7 +10,7 @@ public class FileUtil {
      * @return
      */
     public static String getPublicPath() {
-        return "/Users/admin/.jenkins/workspace/android/download/";
+        return "/Users/admin/excel2csv/";
     }
 
     /**

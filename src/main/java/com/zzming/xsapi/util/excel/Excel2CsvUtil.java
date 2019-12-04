@@ -340,13 +340,12 @@ public class Excel2CsvUtil {
                 i++;
             }
         }
-        String newFileName = FileUtil.getPublicPath() + "【禅道】" + fileName;
+        String newFileName = FileUtil.getPublicPath() + fileName;
         FileOutputStream fileOutputStream = new FileOutputStream(newFileName);
         xSSFWorkbook.write(fileOutputStream);
         fileOutputStream.close();
         xSSFWorkbook.close();
-        String csvName1 = newFileName.replace("【禅道】", "【禅道CSV】");
-        String csvName2 = csvName1.substring(0, csvName1.indexOf(".")) + ".csv";
+        String csvName2 = newFileName.substring(0, newFileName.indexOf(".")) + ".csv";
         try {
             if (isExcel2003) {
                 XLS2CSV xls2csv = new XLS2CSV(newFileName, csvName2);
@@ -360,8 +359,8 @@ public class Excel2CsvUtil {
             return null;
         }
         FileUtil.deleteFile(new File(newFileName));
-        String downloadName = "【禅道CSV】" + fileName.substring(0,fileName.indexOf(".")) + ".csv";
-        return "http://10.200.43.253:8088/download/file/" + downloadName;
+        String downloadName = fileName.substring(0,fileName.indexOf(".")) + ".csv";
+        return "http://10.200.43.253:8088/download/" + downloadName;
     }
 
     private static String getCellValue(Cell cell) {
