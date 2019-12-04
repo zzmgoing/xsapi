@@ -1,31 +1,25 @@
 package com.zzming.xsapi.util;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 public class FileUtil {
 
-    @Value("${file.excel}")
-    private String excelPath;
+    @Value("${file.uploadFolder}")
+    private static String uploadFolder;
 
     /**
      * 获取资源文件路径
      *
      * @return
      */
-    public static String getPublicPath(String floderName) throws FileNotFoundException {
-        File path = new File(ResourceUtils.getURL("classpath:static").getPath().replace("%20"," ").replace('/', '\\'));
-        if(!path.exists()) {
-            path = new File("");
+    public static String getPublicPath() {
+        File floder = new File(uploadFolder);
+        if (!floder.exists()) {
+            floder.mkdirs();
         }
-        File upload = new File(path.getAbsolutePath(),floderName + "/");
-        if(!upload.exists()) {
-            upload.mkdirs();
-        }
-        return upload.getAbsolutePath()+"/";
+        return floder.getAbsolutePath() + "/";
     }
 
     /**

@@ -50,8 +50,6 @@ public class ExcelController {
         String csvFilePath = Excel2CsvUtil.excel2csv(lsFile);
         FileUtil.deleteFile(lsFile);
         if(csvFilePath != null){
-            String newFileName = FileUtil.fixFileName(csvFilePath, oldName);
-//            String path = "http://10.200.43.253:8088/tempfile/" + oldName + ".csv";
             return GsonUtil.createJson(new BaseResponse<>(200, "转换成功,开始下载", csvFilePath));
         }else{
             return GsonUtil.createJson(new BaseResponse<>(202, "转换文件失败", ""));
