@@ -360,7 +360,7 @@ public class Excel2CsvUtil {
         }
         FileUtil.deleteFile(new File(newFileName));
         String downloadName = fileName.substring(0,fileName.indexOf(".")) + ".csv";
-        return "http://10.200.43.253:8088/download/" + downloadName;
+        return "http://10.200.43.253:8088/xsapi/download/" + downloadName;
     }
 
     private static String getCellValue(Cell cell) {
