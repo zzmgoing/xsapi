@@ -1,13 +1,8 @@
 package com.zzming.xsapi.util;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import java.io.File;
 
 public class FileUtil {
-
-    @Value("${file.uploadFolder}")
-    private static String uploadFolder;
 
     /**
      * 获取资源文件路径
@@ -15,11 +10,7 @@ public class FileUtil {
      * @return
      */
     public static String getPublicPath() {
-        File floder = new File(uploadFolder);
-        if (!floder.exists()) {
-            floder.mkdirs();
-        }
-        return floder.getAbsolutePath() + "/";
+        return "/Users/admin/.jenkins/workspace/android/download/";
     }
 
     /**

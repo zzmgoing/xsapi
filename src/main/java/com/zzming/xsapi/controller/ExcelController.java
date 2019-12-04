@@ -37,7 +37,7 @@ public class ExcelController {
      *
      * @return
      */
-    @RequestMapping(value = "/excel2csv", method = RequestMethod.POST)
+    @RequestMapping(value = "/excel2csv", method = RequestMethod.POST, produces = "text/html;charset=UTF-8;")
     public String excel2csv(@RequestParam("file") MultipartFile multipartFile) throws IOException {
         String fileName = multipartFile.getOriginalFilename();
         assert fileName != null;
